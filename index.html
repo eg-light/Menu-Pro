@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>منيو إلكتروني</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            overflow: hidden; /* منع التمرير لتثبيت الصورة كصفحة واحدة */
+            font-family: sans-serif;
+        }
+
+        /* حاوية عرض الصفحة الوحيدة */
+        .viewer-container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .menu-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* تكييف الصورة لتملأ الشاشة بالكامل دون تشويه */
+            display: none;
+        }
+
+        .menu-img.active {
+            display: block;
+        }
+
+        /* شريط التنقل السفلي المقارب للشكل المطلوبة */
+        .nav-bar {
+            position: fixed;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(18, 18, 18, 0.9);
+            padding: 6px 12px;
+            border-radius: 25px;
+            display: flex;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            z-index: 999;
+        }
+
+        .page-btn {
+            background: transparent;
+            border: none;
+            color: #ffffff;
+            padding: 8px 16px;
+            border-radius: 18px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .page-btn.active {
+            background-color: #d4af37; /* اللون الذهبي المضيء عند التفعيل */
+            color: #000000;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="viewer-container">
+        <!-- ضع اسم الصورة الأولى هنا -->
+        <img src="WhatsApp Image 2026-11-02 at 9.06.10 PM.jpeg" class="menu-img active" id="img1" alt="صفحة 1">
+        
+        <!-- ضع اسم الصورة الثانية هنا -->
+        <img src="WhatsApp Image 2026-11-02 at 9.06.10 PM (1).jpeg" class="menu-img" id="img2" alt="صفحة 2">
+        
+        <!-- ضع اسم الصورة الثالثة هنا -->
+        <img src="WhatsApp Image 2026-11-02 at 9.06.11 PM.jpeg" class="menu-img" id="img3" alt="صفحة 3">
+    </div>
+
+    <!-- أزرار التنقل السريع -->
+    <div class="nav-bar">
+        <button class="page-btn active" onclick="showPage(1)">صفحة 1</button>
+        <button class="page-btn" onclick="showPage(2)">صفحة 2</button>
+        <button class="page-btn" onclick="showPage(3)">صفحة 3</button>
+    </div>
+
+    <script>
+        function showPage(pageNumber) {
+            // إخفاء جميع الصور
+            document.querySelectorAll('.menu-img').forEach(img => img.classList.remove('active'));
+            // إلغاء تفعيل جميع الأزرار
+            document.querySelectorAll('.page-btn').forEach(btn => btn.classList.remove('active'));
+
+            // إظهار الصورة المطلوبة وتفعيل زرها
+            document.getElementById('img' + pageNumber).classList.add('active');
+            document.querySelectorAll('.page-btn')[pageNumber - 1].classList.add('active');
+        }
+    </script>
+</body>
+</html>
